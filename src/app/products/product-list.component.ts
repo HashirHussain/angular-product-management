@@ -29,4 +29,9 @@ export class ProductListComponent {
       'assets/images/garden_cart.png'
     ),
   ];
+  showImage: boolean = false;
+  toggleImage(): void {
+    this.showImage = !this.showImage;
+  }
+  filterValue: string;
 }
