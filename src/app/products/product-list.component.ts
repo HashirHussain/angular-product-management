@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductModel } from './product-model';
 
 @Component({
   selector: 'app-products',
   templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   pageTitle: string = 'Product List!';
   products: ProductModel[] = [
     new ProductModel(
@@ -33,5 +34,32 @@ export class ProductListComponent {
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
-  filterValue: string;
+  _listFilter: string;
+  filteredProducts: ProductModel[];
+
+  constructor() {
+    this.filteredProducts = this.products;
+    this._listFilter = '';
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter
+      ? this.performFilter(this.listFilter)
+      : this.products;
+  }
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  performFilter(filterBy: string): ProductModel[] {
+    filterBy = filterBy.trim().toLocaleLowerCase();
+    return this.products.filter(
+      (product: ProductModel) =>
+        product.productName.toLocaleLowerCase().indexOf(filterBy) != -1
+    );
+  }
+
+  ngOnInit(): void {}
 }
