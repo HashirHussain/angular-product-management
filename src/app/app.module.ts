@@ -9,6 +9,8 @@ import { ProductListComponent } from './products/product-list.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 import { StarComponent } from './shared/star.component';
 // import { ProductDetialComponent } from './products/product-detial/product-detial.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { StarComponent } from './shared/star.component';
     ConvertToSpacesPipe,
     StarComponent,
     // ProductDetialComponent,
+    WelcomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

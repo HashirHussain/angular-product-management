@@ -1,9 +1,13 @@
-<app-header></app-header>
+<nav class="nav navbar-expand navbar-light bg-light">
+  <a class="navbar-brand">{{ title }}</a>
+  <ul class="nav nav-pills">
+    <li><a href="" class="nav-link" [routerLink]="['/welcome']">Welcome</a></li>
+    <li>
+      <a href="" class="nav-link" [routerLink]="['/products']">Product List</a>
+    </li>
+  </ul>
+</nav>
+<hr />
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <app-recipes></app-recipes>
-      <app-shopping-list></app-shopping-list>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>
