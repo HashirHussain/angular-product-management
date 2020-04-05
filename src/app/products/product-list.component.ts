@@ -60,6 +60,10 @@ export class ProductListComponent implements OnInit, OnChanges {
     );
   }
 
+  onRatingClicked(message: string): void {
+    this.pageTitle = `Product List! ${message}`;
+  }
+
   ngOnInit(): void {}
 
   ngOnChanges(): void {}
