@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProductModel } from './product-model';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-products',
@@ -8,28 +9,7 @@ import { ProductModel } from './product-model';
 })
 export class ProductListComponent implements OnInit, OnChanges {
   pageTitle: string = 'Product List!';
-  products: ProductModel[] = [
-    new ProductModel(
-      1,
-      'Leaf Rake',
-      'GDN-0011',
-      'March 19, 2019',
-      'Leaf rake with 48-inch wooden handle.',
-      19.95,
-      3.2,
-      'assets/images/leaf_rake.png'
-    ),
-    new ProductModel(
-      2,
-      'Garden Cart',
-      'GDN-0023',
-      'March 18, 2019',
-      '15 gallon capacity rolling garden cart',
-      32.99,
-      4.2,
-      'assets/images/garden_cart.png'
-    ),
-  ];
+  products: ProductModel[] = [];
   showImage: boolean = false;
   toggleImage(): void {
     this.showImage = !this.showImage;
@@ -37,9 +17,7 @@ export class ProductListComponent implements OnInit, OnChanges {
   _listFilter: string = '';
   filteredProducts: ProductModel[];
 
-  constructor() {
-    this.filteredProducts = this.products;
-  }
+  constructor(private productService: ProductService) {}
 
   set listFilter(value: string) {
     this._listFilter = value;
@@ -64,7 +42,10 @@ export class ProductListComponent implements OnInit, OnChanges {
     this.pageTitle = `Product List! ${message}`;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
+    this.filteredProducts = this.products;
+  }
 
   ngOnChanges(): void {}
 }
