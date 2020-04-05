@@ -8,9 +8,9 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 import { StarComponent } from './shared/star.component';
-// import { ProductDetialComponent } from './products/product-detial/product-detial.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ProductListComponent,
     ConvertToSpacesPipe,
     StarComponent,
-    // ProductDetialComponent,
     WelcomeComponent,
     PageNotFoundComponent,
+    ProductDetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
