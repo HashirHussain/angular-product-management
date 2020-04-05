@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit, OnChanges {
   }
   _listFilter: string = '';
   filteredProducts: ProductModel[];
+  errorMessage: string;
 
   constructor(private productService: ProductService) {}
 
@@ -43,8 +44,10 @@ export class ProductListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.productService.getProducts().subscribe({
+      next: (products) => (this.filteredProducts = this.products = products),
+      error: (err) => (this.errorMessage = err),
+    });
   }
 
   ngOnChanges(): void {}
