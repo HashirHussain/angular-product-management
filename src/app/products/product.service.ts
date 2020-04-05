@@ -18,6 +18,13 @@ export class ProductService {
       .pipe(catchError(this.handleError));
   }
 
+  getProduct(id: number): Observable<ProductModel> {
+    //Since we are making request to static json, this api will always give the same data.
+    return this.http
+      .get<ProductModel>(this.productUrl)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessgae = '';
     if (err.error instanceof ErrorEvent) {
