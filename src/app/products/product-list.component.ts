@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProductModel } from './product-model';
 
 @Component({
@@ -6,7 +6,7 @@ import { ProductModel } from './product-model';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnChanges {
   pageTitle: string = 'Product List!';
   products: ProductModel[] = [
     new ProductModel(
@@ -34,12 +34,11 @@ export class ProductListComponent implements OnInit {
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
-  _listFilter: string;
+  _listFilter: string = '';
   filteredProducts: ProductModel[];
 
   constructor() {
     this.filteredProducts = this.products;
-    this._listFilter = '';
   }
 
   set listFilter(value: string) {
@@ -62,4 +61,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngOnChanges(): void {}
 }
