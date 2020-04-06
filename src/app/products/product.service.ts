@@ -8,7 +8,8 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProductService {
-  private productUrl = 'api/products/products.json';
+  //Clone, install and run(npm run json:server): https://github.com/HashirHussain/fake-db to below api
+  private productUrl = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) {}
 
@@ -19,9 +20,8 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<ProductModel> {
-    //Since we are making request to static json, this api will always give the same data.
     return this.http
-      .get<ProductModel>(this.productUrl)
+      .get<ProductModel>(`${this.productUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }
 

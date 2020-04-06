@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit, OnChanges {
     filterBy = filterBy.trim().toLocaleLowerCase();
     return this.products.filter(
       (product: ProductModel) =>
-        product.productName.toLocaleLowerCase().indexOf(filterBy) != -1
+        product.name.toLocaleLowerCase().indexOf(filterBy) != -1
     );
   }
 

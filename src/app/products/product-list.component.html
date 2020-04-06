@@ -36,18 +36,18 @@
               <img
                 *ngIf="showImage"
                 [src]="product.imageUrl"
-                [alt]="product.productName"
-                [title]="product.productName"
+                [alt]="product.name"
+                [title]="product.name"
                 [ngStyle]="{ width: '50px' }"
               />
             </td>
             <td>
-              <a [routerLink]="['/products', product.productId]">
-                {{ product.productName }}
+              <a [routerLink]="['/products', product.id]">
+                {{ product.name }}
               </a>
             </td>
             <td>
-              {{ product.productCode | lowercase | convertToSpaces: "-" }}
+              {{ product.code | lowercase | convertToSpaces: "-" }}
             </td>
             <td>{{ product.releaseDate }}</td>
             <td>{{ product.price | currency: "USD":"symbol":"1.2-2" }}</td>

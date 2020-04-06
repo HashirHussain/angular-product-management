@@ -1,17 +1,17 @@
 export class ProductModel {
   constructor(
-    public productId: number,
-    public productName: string,
-    public productCode: string,
+    public id: number,
+    public name: string,
+    public code: string,
     public releaseDate: string,
     public description: string,
     public price: number,
     public starRating: number,
     public imageUrl: string
   ) {
-    (this.productId = productId),
-      (this.productName = productName),
-      (this.productCode = productCode),
+    (this.id = id),
+      (this.name = name),
+      (this.code = code),
       (this.releaseDate = releaseDate),
       (this.description = description),
       (this.price = price),
