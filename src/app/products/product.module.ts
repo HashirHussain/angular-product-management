@@ -30,6 +30,5 @@ import { ProductDetailGuard } from './product-detail.guard';
       },
     ]),
   ],
-  exports: [RouterModule],
 })
 export class ProductModule {}
