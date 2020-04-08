@@ -1,9 +1,9 @@
-import { ProductState, initialState } from './products.state';
+import { ProductsState, initialState } from './products.state';
 
 export function reducer(
-  state: ProductState = initialState,
+  state: ProductsState = initialState,
   action
-): ProductState {
+): ProductsState {
   switch (action.type) {
     case 'TOGGLE_PRODUCT_IMAGE':
       return {
