@@ -5,6 +5,7 @@ import { pluck } from 'rxjs/operators';
 import { ProductModel } from './product-model';
 import { ProductService } from './product.service';
 import { State as ProductState } from '../products/state/products.state';
+import * as ProductSelector from './state/product.selector';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,6 @@ export class ProductListComponent implements OnInit, OnChanges {
   products: ProductModel[] = [];
   showImage: boolean = false;
   toggleImage(): void {
-    // this.showImage = !this.showImage;
     this.store.dispatch({
       type: 'TOGGLE_PRODUCT_IMAGE',
       payload: !this.showImage,
@@ -61,7 +61,7 @@ export class ProductListComponent implements OnInit, OnChanges {
     });
 
     this.store
-      .pipe(select('products'), pluck('showProductImage'))
+      .pipe(select(ProductSelector.getShowProductImage))
       .subscribe((showProductImage) => (this.showImage = showProductImage));
   }
 
