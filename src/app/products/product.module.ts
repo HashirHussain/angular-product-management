@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductDetailGuard } from './product-detail.guard';
 import { SharedModule } from '../shared/shared.module';
+import { ProductEditComponent } from './product-edit.component';
 
 @NgModule({
   declarations: [
     ConvertToSpacesPipe,
     ProductListComponent,
     ProductDetailComponent,
+    ProductEditComponent,
   ],
   imports: [
     RouterModule.forChild([
@@ -25,6 +27,10 @@ import { SharedModule } from '../shared/shared.module';
         path: 'products/:id',
         canActivate: [ProductDetailGuard],
         component: ProductDetailComponent,
+      },
+      {
+        path: 'products/edit/:id',
+        component: ProductEditComponent,
       },
     ]),
     SharedModule,

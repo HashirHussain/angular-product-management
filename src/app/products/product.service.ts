@@ -25,6 +25,12 @@ export class ProductService {
       .pipe(catchError(this.handleError));
   }
 
+  updateProduct(id: number, data: ProductModel): Observable<ProductModel> {
+    return this.http
+      .put<ProductModel>(`${this.productUrl}/${id}`, data)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessgae = '';
     if (err.error instanceof ErrorEvent) {

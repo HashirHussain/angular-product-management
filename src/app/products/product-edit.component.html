@@ -1,0 +1,115 @@
+<div class="card">
+  <div class="card-header">Edit product {{ productId }}</div>
+  <div class="card-body">
+    <div class="row" *ngIf="product; else loading">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" ngNativeValidate>
+        <div class="form-group">
+          <label for="name">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            autocomplete="off"
+            required
+            [(ngModel)]="product.name"
+            #name="ngModel"
+          />
+        </div>
+        <div class="form-group">
+          <label for="code">
+            Code
+          </label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            class="form-control"
+            autocomplete="off"
+            readonly="true"
+            [(ngModel)]="product.code"
+          />
+        </div>
+        <!-- <div class="form-group">
+          <label for="code">
+            Release Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            class="form-control"
+            autocomplete="off"
+            [(ngModel)]="product.releaseDate"
+          />
+        </div> -->
+        <div class="form-group">
+          <label for="desciption">
+            Desciption
+          </label>
+          <textarea
+            class="form-control"
+            id="desciption"
+            rows="3"
+            name="description"
+            [(ngModel)]="product.description"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">
+            Price
+          </label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            autocomplete="off"
+            min="0"
+            name="price"
+            [(ngModel)]="product.price"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rating"> Rating {{ product.starRating }} </label>
+          <input
+            type="range"
+            class="custom-range"
+            id="rating"
+            min="0"
+            max="5"
+            step="0.1"
+            name="starRating"
+            [(ngModel)]="product.starRating"
+          />
+        </div>
+        <div class="form-group">
+          <img
+            [src]="product.imageUrl"
+            [title]="product.name"
+            class="img-thumbnail"
+            style="width: 100px;"
+          />
+          <!-- <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              id="image"
+              name="imageUrl"
+              [(ngModel)]="product.imageUrl"
+            />
+            <label class="custom-file-label" for="image">Choose Image</label>
+          </div> -->
+        </div>
+        <button class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-outline-secondary" (click)="onBack()">
+      <i class="fa fa-chevron-left"></i> Back
+    </button>
+  </div>
+</div>
+<ng-template #loading>Loading Data...</ng-template>
