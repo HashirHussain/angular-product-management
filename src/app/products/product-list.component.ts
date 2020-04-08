@@ -1,7 +1,10 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { pluck } from 'rxjs/operators';
+
 import { ProductModel } from './product-model';
 import { ProductService } from './product.service';
+import { State as ProductState } from '../products/state/products.state';
 
 @Component({
   selector: 'app-products',
@@ -24,7 +27,7 @@ export class ProductListComponent implements OnInit, OnChanges {
   errorMessage: string;
 
   constructor(
-    private store: Store<any>,
+    private store: Store<ProductState>,
     private productService: ProductService
   ) {}
 
@@ -58,8 +61,8 @@ export class ProductListComponent implements OnInit, OnChanges {
     });
 
     this.store
-      .pipe(select('products'))
-      .subscribe((products) => (this.showImage = products?.showProductImage));
+      .pipe(select('products'), pluck('showProductImage'))
+      .subscribe((showProductImage) => (this.showImage = showProductImage));
   }
 
   ngOnChanges(): void {}
