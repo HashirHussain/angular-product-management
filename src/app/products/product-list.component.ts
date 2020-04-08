@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { ProductModel } from './product-model';
 import { ProductService } from './product.service';
 
@@ -12,13 +13,20 @@ export class ProductListComponent implements OnInit, OnChanges {
   products: ProductModel[] = [];
   showImage: boolean = false;
   toggleImage(): void {
-    this.showImage = !this.showImage;
+    // this.showImage = !this.showImage;
+    this.store.dispatch({
+      type: 'TOGGLE_PRODUCT_IMAGE',
+      payload: !this.showImage,
+    });
   }
   _listFilter: string = '';
   filteredProducts: ProductModel[];
   errorMessage: string;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private store: Store<any>,
+    private productService: ProductService
+  ) {}
 
   set listFilter(value: string) {
     this._listFilter = value;
@@ -48,6 +56,10 @@ export class ProductListComponent implements OnInit, OnChanges {
       next: (products) => (this.filteredProducts = this.products = products),
       error: (err) => (this.errorMessage = err),
     });
+
+    this.store
+      .pipe(select('products'))
+      .subscribe((products) => (this.showImage = products?.showProductImage));
   }
 
   ngOnChanges(): void {}

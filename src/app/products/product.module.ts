@@ -1,14 +1,31 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+
 import { ProductListComponent } from './product-list.component';
 import { ConvertToSpacesPipe } from '../shared/convert-to-spaces.pipe';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { StarComponent } from '../shared/star.component';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+
 import { ProductDetailGuard } from './product-detail.guard';
 import { SharedModule } from '../shared/shared.module';
 import { ProductEditComponent } from './product-edit.component';
+import { reducer } from './state/products.reducer';
+
+const routes: Routes = [
+  {
+    path: 'products',
+    component: ProductListComponent,
+  },
+  {
+    path: 'products/:id',
+    canActivate: [ProductDetailGuard],
+    component: ProductDetailComponent,
+  },
+  {
+    path: 'products/edit/:id',
+    component: ProductEditComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -18,22 +35,9 @@ import { ProductEditComponent } from './product-edit.component';
     ProductEditComponent,
   ],
   imports: [
-    RouterModule.forChild([
-      {
-        path: 'products',
-        component: ProductListComponent,
-      },
-      {
-        path: 'products/:id',
-        canActivate: [ProductDetailGuard],
-        component: ProductDetailComponent,
-      },
-      {
-        path: 'products/edit/:id',
-        component: ProductEditComponent,
-      },
-    ]),
     SharedModule,
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('products', reducer),
   ],
 })
 export class ProductModule {}
