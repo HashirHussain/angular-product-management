@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { pluck } from 'rxjs/operators';
 
 import { ProductModel } from './product-model';
 import { ProductService } from './product.service';
 import { State as ProductState } from '../products/state/products.state';
 import * as ProductSelector from './state/product.selector';
+import * as ProductActions from './state/product.actions';
 
 @Component({
   selector: 'app-products',
@@ -17,10 +17,7 @@ export class ProductListComponent implements OnInit, OnChanges {
   products: ProductModel[] = [];
   showImage: boolean = false;
   toggleImage(): void {
-    this.store.dispatch({
-      type: 'TOGGLE_PRODUCT_IMAGE',
-      payload: !this.showImage,
-    });
+    this.store.dispatch(new ProductActions.ToogleProductImage(!this.showImage));
   }
   _listFilter: string = '';
   filteredProducts: ProductModel[];
